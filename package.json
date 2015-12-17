@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "/home/xavier/bin/node-v5.0.0-linux-x64/bin/node app.js"
+    "start": "/home/xavier/bin/node-v5.0.0-linux-x64/bin/node /home/xavier/bin/node-v5.0.0-linux-x64/bin/node app.js"
   },
   "dependencies": {
     "debug": "~2.2.0",

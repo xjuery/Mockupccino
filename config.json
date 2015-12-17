@@ -1,8 +1,8 @@
-endpoints = [
+[
     {
         "url": "/pouet",
         "httpMethod": "GET",
-        "response":{"msg":"Je suis OK", "ReturnCode":"200"}
+        "responseFile": "/home/xavier/Programmation/Workspaces/MockCenter/review.object.json"
     },
     {
         "url": "/pouet2",
@@ -20,7 +20,3 @@ endpoints = [
         "response":{"msg":"Je suis OK 4", "ReturnCode":"200"}
     }
 ]
-
-module.exports = {
-    endpoints: endpoints
-};
