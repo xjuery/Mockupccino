@@ -1,6 +1,24 @@
 //Application requirements
 var express = require('express');
 
+//Display the logo and Mockupccino info
+//console.log(" __  __            _                  _");
+//console.log("|  \\/  |          | |                | |");
+//console.log("| \\  / | ___   ___| | _____ ___ _ __ | |_ ___ _ __");
+//console.log("| |\\/| |/ _ \\ / __| |/ / __/ _ \\ '_ \\| __/ _ \\ '__|");
+//console.log("| |  | | (_) | (__|   < (_|  __/ | | | ||  __/ |");
+//console.log("|_|  |_|\\___/ \\___|_|\\_\\___\\___|_| |_|\\__\\___|_|");
+//console.log("===================================================");
+//console.log("=====--     Welcome to Mockupccino v0.1     --======");
+//
+
+console.log(" _______              __                           __");
+console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
+console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
+console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
+console.log("|__| Welcome to Mockupccino v0.1 |__|");
+console.log("===================================================================");
+console.log("");
 //Retrieve which config file should be used
 var configFile = './config.json';
 process.argv.forEach(function (val, index, array) {
@@ -17,7 +35,7 @@ var config = JSON.parse(require('fs').readFileSync(configFile, 'utf8'));
 // Create app
 var app = module.exports = express();
 
-//Check the number of configured endpoints
+//Check the number oexample-f configured endpoints
 console.log("Found " + config.length + " endpoints");
 
 //Configure the endpoints
@@ -29,15 +47,15 @@ if (config.length > 0) {
 
 // Add static files if needed
 //TODO: Make the static connect configurable
-app.use("/", express.static("/home/xavier/Programmation/Workspaces/KARADoc/app"));
-app.use("/styles", express.static("/home/xavier/Programmation/Workspaces/KARADoc/.tmp/styles"));
+app.use("/", express.static("/home/xavier/Programmation/workspaces/KARADoc/app"));
+app.use("/styles", express.static("/home/xavier/Programmation/workspaces/KARADoc/.tmp/styles"));
 
 // The End: launch the server on default port 3000
 //TODO: Make the server port configurable
 var port = 3000;
 app.listen(port);
 //TODO: The console logging configurable
-console.log("MockCenter is ready and listening on port " + port);
+console.log("Mockupccino is ready and listening on port " + port);
 
 /**
  * Function that adds all the necessary configuration for 1 endpoint
@@ -48,16 +66,16 @@ console.log("MockCenter is ready and listening on port " + port);
 function addEndpoint(element, index, array) {
     //Declare each endpoint
     if (element.httpMethod === "POST") {
-        app.post(element.url, endpointCallback(element, res));
+        app.post(element.url, function (req, res) {endpointCallback(element, res)});
         console.log("Adding: POST : " + element.url);
     } else if (element.httpMethod === "PUT") {
-        app.put(element.url, endpointCallback(element, res));
+        app.put(element.url, function (req, res) {endpointCallback(element, res)});
         console.log("Adding: PUT : " + element.url);
     } else if (element.httpMethod === "DELETE") {
-        app.delete(element.url, endpointCallback(element, res));
+        app.delete(element.url, function (req, res) {endpointCallback(element, res)});
         console.log("Adding: DELETE : " + element.url);
     } else {//GET
-        app.get(element.url, endpointCallback(element, res));
+        app.get(element.url, function (req, res) {endpointCallback(element, res)});
         console.log("Adding: GET : " + element.url);
     }
 }
@@ -143,12 +161,12 @@ function getStatusCodeForEndPoint(cfgfile, url, method) {
 }
 
 /**
- * Function that sets the CORS headers in order to allow the Mockcenter to be contacted by a client in a different domain.
+ * Function that sets the CORS headers in order to allow the Mockupccino to be contacted by a client in a different domain.
  * @param httpResponse The response that will be sent back to the client.
  * @param originName The origin name of the client
  */
 function setCORSHeaders(httpResponse, originName) {
-    //TODO: Make the liste of CORS headers configurable
+    //TODO: Make the list of CORS headers configurable
     httpResponse.header("Access-Control-Allow-Origin", originName /*"http://localhost:9000"*/);
     httpResponse.header("Access-Control-Allow-Credentials", "true");
     httpResponse.header("Cache-Control", "no-cache");
