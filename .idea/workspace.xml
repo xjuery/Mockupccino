@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a842905-5b40-4126-a43c-6332f2baf8c9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mockupccino" afterPath="$PROJECT_DIR$/mockupccino" />
-    </list>
+    <list default="true" id="0a842905-5b40-4126-a43c-6332f2baf8c9" name="Default" comment="" />
     <ignored path="MockCenter.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/" />
@@ -27,31 +25,11 @@
       <file leaf-file-name="mockupccino" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mockupccino">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8695652">
-              <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+            <state vertical-scroll-proportion="-5.173913">
+              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
               <folding>
                 <element signature="e#2295#3433#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.333333">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.666666">
-              <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -707,8 +685,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mockupccino">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8695652">
-          <caret line="30" column="45" selection-start-line="30" selection-start-column="45" selection-end-line="30" selection-end-column="45" />
+        <state vertical-scroll-proportion="-5.173913">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
           <folding>
             <element signature="e#2295#3433#0" expanded="false" />
           </folding>
