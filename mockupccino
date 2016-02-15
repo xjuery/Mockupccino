@@ -1,0 +1,239 @@
+#!/usr/bin/env node
+
+//  Mockupccino - A REST/JSON simulation server
+//  Copyright (C) 2016  Xavier JUERY
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+//Application dependencies
+var express = require('express');
+var _ = require('lodash');
+var bodyParser = require('body-parser');
+var multer = require('multer');
+var upload = multer();
+
+//Display the logo and Mockupccino info
+console.log(" _______              __                           __");
+console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
+console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
+console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
+console.log("|__| Welcome to Mockupccino v0.1 |__|");
+console.log("===================================================================");
+console.log("");
+
+//Define which config file should be used
+var configFile = './config.json';
+process.argv.forEach(function (val, index, array) {
+    if (index === 2) {
+        console.log("Default config file overridden by :");
+        console.log(val);
+        configFile = val;
+    }
+});
+
+//Parse the config file
+var config = JSON.parse(require('fs').readFileSync(configFile, 'utf8'));
+
+// Create the app
+var app = module.exports = express();
+
+//Initialize the data "cache"
+var dataCache = new Array();
+
+//Check the number of configured endpoints
+if (!_.isNil(config.endpoints)) {
+    console.log("Found " + config.endpoints.length + " endpoints");
+}
+
+//Configure the endpoints
+if (config.endpoints.length > 0) {
+    //Add each endpoints
+    config.endpoints.forEach(addEndpoint);
+
+    // Add the special endpoint for populating specific responses in the endpoints
+    //TODO: Add the special endpoint for populating specific responses in the endpoints
+    populateEndpoint();
+
+    // Add static files if needed
+    // Check if the global config is defined or not
+    if (!_.isNil(config.global)) {
+        // Check if the server has to connect some static contents
+        if (!_.isNil(config.global.staticContent)) {
+            config.global.staticContent.forEach(function (element, index, array) {
+                if (!_.isNil(element)) {
+                    app.use(element.url, express.static(element.path));
+                }
+            });
+        }
+
+        // Set the Mockupccino server port
+        if (!_.isNil(config.global.port)) {
+            app.listen(config.global.port);
+
+            //TODO : The console logging configurable
+            console.log("Mockupccino is ready and listening on port " + config.global.port);
+        } else {
+            // Else set the default port 3000
+            app.listen(3000);
+        }
+    }
+} else {
+    console.log("No endpoints found..Exit")
+}
+
+/**
+ * Function that adds all the necessary configuration for 1 endpoint
+ * @param element: The config element taken from the config file
+ * @param index
+ * @param array
+ */
+function addEndpoint(element, index, array) {
+    //Declare each endpoint
+    if (element.httpMethod === "POST") {
+        app.post(element.url, function (req, res) {
+            endpointCallback(element, res)
+        });
+        console.log("Adding: POST : " + element.url);
+    } else if (element.httpMethod === "PUT") {
+        app.put(element.url, function (req, res) {
+            endpointCallback(element, res)
+        });
+        console.log("Adding: PUT : " + element.url);
+    } else if (element.httpMethod === "DELETE") {
+        app.delete(element.url, function (req, res) {
+            endpointCallback(element, res)
+        });
+        console.log("Adding: DELETE : " + element.url);
+    } else {//GET
+        app.get(element.url, function (req, res) {
+            endpointCallback(element, res)
+        });
+        console.log("Adding: GET : " + element.url);
+    }
+}
+
+/**
+ * Default callback function for the endpoints
+ * @param element: Config element taken from the config file
+ * @param res: HTTP response
+ */
+function endpointCallback(element, res) {
+    //Tell the console that this endpoint as been called
+    console.log("Endpoint Call: " + element.url);
+
+    //Set the CORS Header for local development
+    //TODO: Make the CORS Headers configurable
+    setCORSHeaders(res, "http://*/*");
+
+    //Set the return status code
+    var sCode = getStatusCodeForEndPoint(configFile, element.url, element.httpMethod);
+    if (sCode != null) {
+        res.statusCode = sCode;
+    }
+
+    //Set the body that has to be returned
+    res.send(getResponseForEndpoint(configFile, element.url, element.httpMethod));
+}
+
+/**
+ * Function that calculates the answer that should be send back to the REST Client
+ * @param cfgfile The global configuration file
+ * @param url The endpoint URL (this URL and the HTTP method are considered as a primary key for the endpoint)
+ * @param method The HTTP method of the endpoint
+ * @returns {*} The response that should be sent back to the REST client
+ */
+function getResponseForEndpoint(cfgfile, url, method) {
+    console.dir(dataCache);
+    var myResp = dataCache[url + "-" + method];
+    console.dir(myResp);
+    if (!_.isNil(myResp)) {
+        return myResp;
+    } else {
+        var cfg = JSON.parse(require('fs').readFileSync(cfgfile, 'utf8'));
+
+        var resp = null;
+        cfg.endpoints.forEach(function (element, index, array) {
+            if ((element.url == url) && (element.httpMethod == method)) {
+                if (element.responseFile) {
+                    //TODO: Make the console log configurable
+                    console.log(element.responseFile);
+                    resp = JSON.parse(require('fs').readFileSync(element.responseFile, 'utf8'));
+
+                    return;
+                } else {
+                    //TODO: Make the console log configurable
+                    console.log(element.response);
+                    resp = element.response;
+
+                    return;
+                }
+            }
+        });
+        //TODO: Make the console log configurable
+        console.log(resp);
+        return resp;
+    }
+}
+
+/**
+ * Function that calculates the status code that should returned to the REST client
+ * @param cfgfile The global configuration file
+ * @param url The endpoint URL (this URL and the HTTP method are considered as a primary key for the endpoint)
+ * @param method The HTTP method
+ * @returns {*}
+ */
+function getStatusCodeForEndPoint(cfgfile, url, method) {
+    var cfg = JSON.parse(require('fs').readFileSync(cfgfile, 'utf8'));
+
+    var code = null;
+    cfg.endpoints.forEach(function (element, index, array) {
+        if ((element.url == url) && (element.httpMethod == method)) {
+            if (element.responseCode) {
+                code = element.responseCode;
+            } else {
+                code = 200;
+            }
+        }
+    });
+    return code;
+}
+
+/**
+ * Function that sets the CORS headers in order to allow the Mockupccino to be contacted by a client in a different domain.
+ * @param httpResponse The response that will be sent back to the client.
+ * @param originName The origin name of the client
+ */
+function setCORSHeaders(httpResponse, originName) {
+    //TODO: Make the list of CORS headers configurable
+    httpResponse.header("Access-Control-Allow-Origin", originName);
+    httpResponse.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    httpResponse.header("Access-Control-Allow-Headers", "Content-Type, x-access-token, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+    httpResponse.header("Access-Control-Allow-Credentials", "true");
+    httpResponse.header("Cache-Control", "no-cache");
+}
+
+function populateEndpoint() {
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
+    //app.use(express.bodyParser());
+    app.post('/populate', upload.array(), function (req, res, next) {
+        console.log(req.body);
+        dataCache[req.body.url + "-" + req.body.method] = req.body.object;
+        console.dir(dataCache);
+        //Prepare response
+        res.statusCode = 200;
+        res.send("");
+    });
+    console.log("Adding: POST : /populate");
+}

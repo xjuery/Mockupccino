@@ -1,22 +1,39 @@
-[
-    {
-        "url": "/pouet",
-        "httpMethod": "GET",
-        "response": {"msg":"Je suis OK Toto", "ReturnCode":"200"}
+{
+    "global":{
+        "port": 4000,
+        "staticContent":[
+            {
+                "url": "/",
+                "path": "/home/xavier/Programmation/workspaces/KARADoc/app"
+            },
+            {
+                "url": "/styles",
+                "path": "/home/xavier/Programmation/workspaces/KARADoc/.tmp/styles"
+            }
+        ]
     },
-    {
-        "url": "/pouet2",
-        "httpMethod": "POST",
-        "response":{"msg":"Je suis OK 2", "ReturnCode":"200"}
-    },
-    {
-        "url": "/pouet3",
-        "httpMethod": "PUT",
-        "response":{"msg":"Je suis OK 3", "ReturnCode":"200"}
-    },
-    {
-        "url": "/pouet4",
-        "httpMethod": "DELETE",
-        "response":{"msg":"Je suis OK 4", "ReturnCode":"200"}
-    }
-]
+    "endpoints":[
+        {
+            "url": "/pouet",
+            "httpMethod": "GET",
+            "response": {"msg":"Je suis OK Toto", "ReturnCode":"200"}
+        },
+        {
+            "url": "/pouet2",
+            "httpMethod": "POST",
+            "response":{"msg":"Je suis OK 2", "ReturnCode":"200"}
+        },
+        {
+            "url": "/pouet3",
+            "httpMethod": "PUT",
+            "response":{"msg":"Je suis OK 3", "ReturnCode":"200"}
+        },
+        {
+            "url": "/pouet4",
+            "httpMethod": "DELETE",
+            "response":{"msg":"Je suis OK 4", "ReturnCode":"200"}
+        }
+    ]
+}
+
+

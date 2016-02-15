@@ -1,12 +1,38 @@
 {
-  "name": "Mockupccino",
-  "version": "0.0.0",
-  "private": true,
+  "name": "mockupccino",
+  "version": "0.0.1",
+  "description": "A REST/JSON simulation server",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xjuery/Mockupccino.git"
+  },
+  "bin": {
+    "mockupccino": "mockupccino"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "keywords": [
+    "REST",
+    "JSON",
+    "simulation",
+    "server",
+    "mockup",
+    "tests",
+    "unit"
+  ],
   "dependencies": {
     "debug": "~2.2.0",
     "express": "~4.13.1"
-  }
+  },
+  "author": "Xavier JUERY",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/xjuery/Mockupccino/issues"
+  },
+  "homepage": "https://github.com/xjuery/Mockupccino#readme"
 }
