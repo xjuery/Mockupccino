@@ -28,12 +28,12 @@ console.log(" _______              __                           __");
 console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
 console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
 console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
-console.log("|__| Welcome to Mockupccino v0.1 |__|");
+console.log("|__| Welcome to Mockupccino v1.0 |__|");
 console.log("===================================================================");
 console.log("");
 
 //Define which config file should be used
-var configFile = './config.json';
+var configFile = './mockupccino-config.json';
 process.argv.forEach(function (val, index, array) {
     if (index === 2) {
         console.log("Default config file overridden by :");
@@ -43,7 +43,15 @@ process.argv.forEach(function (val, index, array) {
 });
 
 //Parse the config file
-var config = JSON.parse(require('fs').readFileSync(configFile, 'utf8'));
+var config = null;
+try {
+    config = JSON.parse(require('fs').readFileSync(configFile, 'utf8'));
+}
+catch(err) {
+    console.log("Unable to find or parse config file...Exit");
+    return;
+}
+
 
 // Create the app
 var app = module.exports = express();
