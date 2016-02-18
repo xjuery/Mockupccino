@@ -80,6 +80,7 @@ The following example shows how the config file should look like:
 </pre>
 
 First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections: the global section and the endpoints section.
+
 **The `global` section**
 In this section, you can set the server port and the staticContent that should served by the server. The `port` attribute, is mandatory but the `staticContent` attribute is optional.
 
