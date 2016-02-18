@@ -82,11 +82,13 @@ The following example shows how the config file should look like:
 First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections: the global section and the endpoints section.
 
 **The `global` section**
+
 In this section, you can set the server port and the staticContent that should served by the server. The `port` attribute, is mandatory but the `staticContent` attribute is optional.
 
 The `staticContent` attribute is an array of `path` that should be served as soon as the given `url` is requested.
 
 **The `endpoints`section**
+
 This section is an array of the different endpoints that should be exposed by the server. The `url` and `httpMethod` attributes are mandatory but the `response` or `responseFile` are optional.
 
 Pay attention, there should be at least, and no more than, one of the response* attribute.
