@@ -16,6 +16,7 @@
         {
             "url": "/pouet",
             "httpMethod": "GET",
+            "loadSim": 5000,
             "response": {"msg":"Je suis OK Toto", "ReturnCode":"200"}
         },
         {

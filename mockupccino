@@ -28,7 +28,7 @@ console.log(" _______              __                           __");
 console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
 console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
 console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
-console.log("|__| Mockupccino v1.0.1          |__|");
+console.log("|__| Mockupccino v1.0.2          |__|");
 console.log("===================================================================");
 console.log("");
 
@@ -150,8 +150,15 @@ function endpointCallback(element, res) {
         res.statusCode = sCode;
     }
 
-    //Set the body that has to be returned
-    res.send(getResponseForEndpoint(configFile, element.url, element.httpMethod));
+    var time = 0;
+    if(!_.isNil(element.loadSim)){
+        time = element.loadSim;
+    }
+
+    setTimeout(function() {
+        //Set the body that has to be returned
+        res.send(getResponseForEndpoint(configFile, element.url, element.httpMethod));
+    }, time);
 }
 
 /**
