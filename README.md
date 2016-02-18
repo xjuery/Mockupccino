@@ -79,16 +79,21 @@ The following example shows how the config file should look like:
 }
 </pre>
 
-First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections:
-1. The `global` section:
+First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections: the global section and the endpoints section.
+**The `global` section**
 In this section, you can set the server port and the staticContent that should served by the server. The `port` attribute, is mandatory but the `staticContent` attribute is optional.
+
 The `staticContent` attribute is an array of `path` that should be served as soon as the given `url` is requested.
-2. The `endpoints`section:
+
+**The `endpoints`section**
 This section is an array of the different endpoints that should be exposed by the server. The `url` and `httpMethod` attributes are mandatory but the `response` or `responseFile` are optional.
+
 Pay attention, there should be at least, and no more than, one of the response* attribute.
+
 The `response` attribute allows to directly set the response (that Mockupcino should answer for a given url) in the config file. 
 But, if the size of the response object is big, you can replace the `response` attribute by a `responseFile` attribute. This attribute will allow you to declare in which file the response should be retrieved.
-The `loadSim`attribute, allows you, also, to simulate a server load. So if you want to simulate a real Production server and, for example, you know that the average response time (of this server) is 5000ms, you can simply configure the `loadSim` attribute with 5000. In that case, the Mockupccino server will wait during 5000ms before sending back the response to the REST Client.
+
+The `loadSim` attribute, allows you, also, to simulate a server load. So if you want to simulate a real Production server and, for example, you know that the average response time (of this server) is 5000ms, you can simply configure the `loadSim` attribute with 5000. In that case, the Mockupccino server will wait during 5000ms before sending back the response to the REST Client.
 This feature is usefull if you want to test how your client will react if the backend server is overloaded.
 
 ##Future features
