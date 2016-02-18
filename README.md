@@ -101,8 +101,7 @@ This feature is usefull if you want to test how your client will react if the ba
 
 ##Future features
 1. Ability to configure the CORS Headers
-2. Ability to use a YAML config file
-3. Add Swagger compatibility
-4. grunt/gulp module
-5. CLI interface for creating the config file
+2. Ability to use a YAML/Swagger config file
+3. grunt/gulp module
+4. CLI interface for creating the config file
 
