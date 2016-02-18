@@ -1,7 +1,7 @@
 # Mockupccino
 
 ##Overview
-Mockupccino is a REST/JSON server simulation tool.
+Mockupccino is a REST/JSON server simulation tool which will allow you to test REST clients that you are trying to develop.
 
 Mockupccino doesn't require any intrusive configuration into your projects, just run Mockupccino with its configuration file and that's all.
 The main objective of Mockupccino is to prevent your projects from the risk of webservices connection bugs that could be caused by an intrusive faulty configuration.
