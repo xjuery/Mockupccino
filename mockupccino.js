@@ -1,0 +1,57 @@
+/// <reference path="defs/node/node.d.ts" />
+/// <reference path="defs/express/express.d.ts" />
+/// <reference path="defs/lodash/lodash.d.ts" />
+/// <reference path="ConfigurationStructure.ts" />
+/// <reference path="MockupccinoServer.ts" />
+/// <reference path="Configuration.ts" />
+//Application dependencies
+var express = require("express");
+var MockupccinoServer = require("./MockupccinoServer");
+var Configuration = require("./Configuration");
+exports.App = main(process.argv);
+/**
+ * The main function of mockupccino
+ * @param args The arguments provided in the CLI
+ */
+function main(args) {
+    //Instanciate of the express server
+    var expressApp = express();
+    //display the logo
+    displayLogo();
+    //Define which config file should be used
+    var configFile = './mockupccino-config.json';
+    args.forEach(function (cfg, index) {
+        if (index === 2) {
+            console.log("Default config file overridden by :");
+            console.log(cfg);
+            configFile = cfg;
+        }
+    });
+    //Parse the config file
+    var config;
+    config = new Configuration(configFile);
+    //Check if configuration is valid
+    if (config.isValid()) {
+        console.log("Found " + config.getEndpoints().length + " endpoints");
+        var mockupccinoServer = new MockupccinoServer(config, expressApp);
+        mockupccinoServer.launch();
+        return expressApp;
+    }
+    else {
+        console.log("No endpoints found..Exit");
+    }
+}
+/**
+ * Function to display the logo of Mockupccino
+ */
+function displayLogo() {
+    //Display the logo and Mockupccino info
+    console.log(" _______              __                           __");
+    console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
+    console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
+    console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
+    console.log("|__| Mockupccino v1.0.3          |__|");
+    console.log("===================================================================");
+    console.log("");
+}
+//# sourceMappingURL=mockupccino.js.map

@@ -21,16 +21,6 @@ var express = require('express');
 var _ = require('lodash');
 var bodyParser = require('body-parser');
 var multer = require('multer');
-var upload = multer();
-
-//Display the logo and Mockupccino info
-console.log(" _______              __                           __");
-console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
-console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
-console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
-console.log("|__| Mockupccino v1.0.3          |__|");
-console.log("===================================================================");
-console.log("");
 
 //Define which config file should be used
 var configFile = './mockupccino-config.json';
@@ -239,6 +229,7 @@ function setCORSHeaders(httpResponse, originName) {
 }
 
 function populateEndpoint() {
+    var upload = multer();
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
     //app.use(express.bodyParser());

@@ -1,7 +1,10 @@
-# Mockupccino
+Mockupccino - a REST/JSON server simulation tool
+================================================
+
+[![NPM version](https://img.shields.io/npm/v/js-yaml.svg)](https://www.npmjs.org/package/js-yaml)
 
 ##Overview
-Mockupccino is a REST/JSON server simulation tool which will allow you to test REST clients that you are trying to develop.
+Mockupccino is a REST/JSON server simulation tool which allow developers to test their REST clients.
 
 Mockupccino doesn't require any intrusive configuration into your projects, just run Mockupccino with its configuration file and that's all.
 The main objective of Mockupccino is to prevent your projects from the risk of webservices connection bugs that could be caused by an intrusive faulty configuration.
@@ -13,19 +16,33 @@ As a solution, Mockupccino can work in 2 modes:
 1. CORS Headers mode: in that mode, Mockupccino will automatically set the right CORS headers in order to allow you to access the REST webservices.
 2. Serve static part mode: in that mode, Mockupccino will also serve the html, js and other files in your frontend as if everything was on the same test server.
 
-##Installation
-In order to install Mockupccino, you only have to execute the following command `npm install mockupccino`.
-If you want to install it globally, simply type `npm install -g mockupccino`.
+Installation
+------------
+### Local install
+```
+npm install mockupccino
+```
 
-##Launch the server in a terminal
-In a terminal, simply type the following command to launch the Mockupccino server: `mockupccino <config file>`
+### Global install
+```
+npm install -g mockupccino
+```
+
+Usage
+-----
+
+### Launching the server in a terminal
+```
+mockupccino <config file>
+```
+
 By default, if the `<config file>`parameter is not set, the mockupccino server will try to find a file named `mockupccino-config.json` in the current working directory.
-If you want to know how the content of the config file should look like, please see the `configuration file` section.
+Please see the `configuration file` section, if you want to know how to setup the Mockupccino server.
 
-##Launch the server (in a project) with grunt
+### Launching the server (within a project) with grunt
 Currently, the best to launch the Mockupccino server via grunt is to use the `grunt-shell-spawn` grunt module. 
 Please see the `grunt-shell-spawn` module documentation in order to know how to install it, and then create a task (in your gruntfile) that should look like this:
-<pre>
+```
 shell: {
     mockupccino: {
         command: 'mockupccino <path to your config.json file> &',
@@ -34,11 +51,11 @@ shell: {
         }
     }
 }
-</pre>
+```
 
 ##The configuration file
 The following example shows how the config file should look like:
-<pre>
+```
 {
     "global":{
         "port": 4000,
@@ -77,27 +94,26 @@ The following example shows how the config file should look like:
         }
     ]
 }
-</pre>
+```
 
 First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections: the global section and the endpoints section.
 
-**The `global` section**
+### The `global` section
 
-In this section, you can set the server port and the staticContent that should served by the server. The `port` attribute, is mandatory but the `staticContent` attribute is optional.
+In this section, you can set the server port and the staticContent that should served by the server. 
+- `port`: (Mandatory) mockupccino server port 
+- `staticContent`: (Optional) Array of `path` that should be served as soon as the given `url` is requested.
 
-The `staticContent` attribute is an array of `path` that should be served as soon as the given `url` is requested.
+### The `endpoints`section
 
-**The `endpoints`section**
-
-This section is an array of the different endpoints that should be exposed by the server. The `url` and `httpMethod` attributes are mandatory but the `response` or `responseFile` are optional.
+This section is an array of the different endpoints that should be exposed by the server. 
+- `url`: (Mandatory) endpoint's url exposed by the server
+- `httpMethod`: (Mandatory) endpoint's HTTP method
+- `response`: Response that Mockupcino should answer for a given url
+- `responseFile`: path of the file where the response is set.
+- `loadSim`: (Optional) Amount of milliseconds the Mockupccino server will wait in order to simulate a average server response time.
 
 Pay attention, there should be at least, and no more than, one of the response* attribute.
-
-The `response` attribute allows to directly set the response (that Mockupcino should answer for a given url) in the config file. 
-But, if the size of the response object is big, you can replace the `response` attribute by a `responseFile` attribute. This attribute will allow you to declare in which file the response should be retrieved.
-
-The `loadSim` attribute, allows you, also, to simulate a server load. So if you want to simulate a real Production server and, for example, you know that the average response time (of this server) is 5000ms, you can simply configure the `loadSim` attribute with 5000. In that case, the Mockupccino server will wait during 5000ms before sending back the response to the REST Client.
-This feature is usefull if you want to test how your client will react if the backend server is overloaded.
 
 ##Future features
 1. Ability to configure the CORS Headers
