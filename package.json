@@ -30,7 +30,8 @@
     "express": "~4.13.1",
     "lodash": "~4.3.0",
     "body-parser": "~1.14.2",
-    "multer": "~1.1.0"
+    "multer": "~1.1.0",
+    "js-yaml": "~3.5.3"
   },
   "author": "Xavier JUERY",
   "license": "MIT",

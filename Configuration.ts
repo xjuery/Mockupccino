@@ -2,6 +2,7 @@
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="ConfigurationStructure.ts" />
 import * as _ from "lodash";
+var yaml = require('js-yaml');
 
 class Configuration {
     configFile:string;
@@ -13,8 +14,26 @@ class Configuration {
     }
 
     load() {
+        if(_.endsWith(this.configFile, ".json")){
+            this.configuration = this.parseJSONConfig(this.configFile);
+        } else if(_.endsWith(this.configFile, ".yaml")){
+            this.configuration = this.parseYAMLConfig(this.configFile);
+        }
+    }
+
+    private parseJSONConfig(cFile:string):ConfigurationStructure {
         try {
-            this.configuration = JSON.parse(require('fs').readFileSync(this.configFile, 'utf8'));
+            return JSON.parse(require('fs').readFileSync(cFile, 'utf8'));
+        }
+        catch (err) {
+            console.log("Unable to find or parse config file.");
+            return;
+        }
+    };
+
+    private parseYAMLConfig(cFile:string):ConfigurationStructure {
+        try {
+            return yaml.safeLoad(require('fs').readFileSync(cFile, 'utf8'));
         }
         catch (err) {
             console.log("Unable to find or parse config file.");
@@ -40,7 +59,7 @@ class Configuration {
         return null;
     }
 
-    getGlobalConfig(): GlobalConfiguration {
+    getGlobalConfig():GlobalConfiguration {
         if (!_.isNil(this.configuration)) {
             if (!_.isNil(this.configuration.global)) {
                 return this.configuration.global;

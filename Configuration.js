@@ -2,14 +2,33 @@
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="ConfigurationStructure.ts" />
 var _ = require("lodash");
+var yaml = require('js-yaml');
 var Configuration = (function () {
     function Configuration(cfgFile) {
         this.configFile = cfgFile;
         this.load();
     }
     Configuration.prototype.load = function () {
+        if (_.endsWith(this.configFile, ".json")) {
+            this.configuration = this.parseJSONConfig(this.configFile);
+        }
+        else if (_.endsWith(this.configFile, ".yaml")) {
+            this.configuration = this.parseYAMLConfig(this.configFile);
+        }
+    };
+    Configuration.prototype.parseJSONConfig = function (cFile) {
         try {
-            this.configuration = JSON.parse(require('fs').readFileSync(this.configFile, 'utf8'));
+            return JSON.parse(require('fs').readFileSync(cFile, 'utf8'));
+        }
+        catch (err) {
+            console.log("Unable to find or parse config file.");
+            return;
+        }
+    };
+    ;
+    Configuration.prototype.parseYAMLConfig = function (cFile) {
+        try {
+            return yaml.safeLoad(require('fs').readFileSync(cFile, 'utf8'));
         }
         catch (err) {
             console.log("Unable to find or parse config file.");
