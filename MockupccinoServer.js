@@ -5,11 +5,12 @@
 /// <reference path="ConfigurationStructure.ts" />
 /// <reference path="Configuration.ts" />
 /// <reference path="Endpoint.ts" />
-//var multer = require('multer');
+/// <reference path="tools/Loggaccino.ts" />
 var bodyParser = require("body-parser");
 var multer = require("multer");
 var _ = require("lodash");
 var express = require("express");
+var Logger = require("./tools/Loggaccino");
 var MockupccinoServer = (function () {
     function MockupccinoServer(cfg, app) {
         this.config = cfg;
@@ -37,15 +38,29 @@ var MockupccinoServer = (function () {
                     }
                 });
             }
+            //Sever Error handling
+            //this.expressServer.configure(function(){
+            //    this.expressServer.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+            //});
+            //this.expressServer.configure(
+            //    () => {
+            //        this.expressServer.use(
+            //            (err, req, res, next) => {
+            //                console.log(err);
+            //            }
+            //        );
+            //    }
+            //);
             // Set the Mockupccino server port
             if (!_.isNil(this.config.getGlobalConfig().port)) {
                 this.expressServer.listen(this.config.getGlobalConfig().port);
                 //TODO : The console logging configurable
-                console.log("Mockupccino is ready and listening on port " + this.config.getGlobalConfig().port);
+                Logger.info("Configuration: Server port: " + this.config.getGlobalConfig().port);
             }
             else {
                 // Else set the default port 3000
                 this.expressServer.listen(3000);
+                Logger.info("Configuration: Server port: 3000");
             }
         }
     };
@@ -56,31 +71,31 @@ var MockupccinoServer = (function () {
             this.expressServer.post(element.url, function (req, res) {
                 _this.endpointCallback(element, res);
             });
-            console.log("Adding: POST : " + element.url);
+            Logger.info("Adding: POST : " + element.url);
         }
         else if (element.httpMethod === "PUT") {
             this.expressServer.put(element.url, function (req, res) {
                 _this.endpointCallback(element, res);
             });
-            console.log("Adding: PUT : " + element.url);
+            Logger.info("Adding: PUT : " + element.url);
         }
         else if (element.httpMethod === "DELETE") {
             this.expressServer.delete(element.url, function (req, res) {
                 _this.endpointCallback(element, res);
             });
-            console.log("Adding: DELETE : " + element.url);
+            Logger.info("Adding: DELETE : " + element.url);
         }
         else {
             this.expressServer.get(element.url, function (req, res) {
                 _this.endpointCallback(element, res);
             });
-            console.log("Adding: GET : " + element.url);
+            Logger.info("Adding: GET : " + element.url);
         }
     };
     MockupccinoServer.prototype.endpointCallback = function (element, res) {
         var _this = this;
         //Tell the console that this endpoint as been called
-        console.log("Endpoint Call: " + element.url);
+        Logger.debug("Endpoint Call: " + element.url);
         //Set the CORS Header for local development
         //TODO: Make the CORS Headers configurable
         //setCORSHeaders(res, "http://*/*");
@@ -110,12 +125,12 @@ var MockupccinoServer = (function () {
                 if ((element.url == url) && (element.httpMethod == method)) {
                     if (element.responseFile) {
                         //TODO: Make the console log configurable
-                        console.log(element.responseFile);
+                        Logger.debug(element.responseFile);
                         myResp = JSON.parse(require('fs').readFileSync(element.responseFile, 'utf8'));
                     }
                     else {
                         //TODO: Make the console log configurable
-                        console.log(element.response);
+                        Logger.debug(JSON.stringify(element.response));
                         myResp = element.response;
                     }
                 }
@@ -145,14 +160,14 @@ var MockupccinoServer = (function () {
         this.expressServer.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
         //app.use(express.bodyParser());
         this.expressServer.post('/populate', upload.any(), function (req, res, next) {
-            console.log(req.body);
+            Logger.debug(req.body);
             _this.dataCache[req.body.url + "-" + req.body.method] = req.body.object;
             console.dir(_this.dataCache);
             //Prepare response
             res.statusCode = 200;
             res.send("");
         });
-        console.log("Adding: POST : /populate");
+        Logger.info("Adding: POST : /populate");
     };
     return MockupccinoServer;
 })();
