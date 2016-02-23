@@ -3,7 +3,7 @@ Mockupccino - a REST/JSON server simulation tool
 
 [![NPM version](https://img.shields.io/npm/v/js-yaml.svg)](https://www.npmjs.org/package/js-yaml)
 
-License [MIT](https://github.com/xjuery/Mockupccino/blob/master/LICENSE)
+License [LGPL v3](https://github.com/xjuery/Mockupccino/blob/master/LICENSE)
 
 ##Overview
 Mockupccino is a REST/JSON server simulation tool which allow developers to test their REST clients.

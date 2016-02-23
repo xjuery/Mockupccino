@@ -34,7 +34,7 @@
     "js-yaml": "~3.5.3"
   },
   "author": "Xavier JUERY",
-  "license": "MIT",
+  "license": "LGPL-3.0",
   "bugs": {
     "url": "https://github.com/xjuery/Mockupccino/issues"
   },
