@@ -43,8 +43,8 @@ By default, if the `<config file>`parameter is not set, the mockupccino server w
 Please see the `configuration file` section, if you want to know how to setup the Mockupccino server.
 
 ### Launching the server (within a project) with grunt
-Currently, the best to launch the Mockupccino server via grunt is to use the `grunt-shell-spawn` grunt module. 
-Please see the `grunt-shell-spawn` module documentation in order to know how to install it, and then create a task (in your gruntfile) that should look like this:
+Currently, the best way to launch the Mockupccino server via grunt is to use the `grunt-shell-spawn` grunt module. 
+Please see the `grunt-shell-spawn` module documentation in order to know how to install it. Then create a task (in your gruntfile) that should look like this:
 ```
 shell: {
     mockupccino: {

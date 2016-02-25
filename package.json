@@ -38,5 +38,9 @@
   "bugs": {
     "url": "https://github.com/xjuery/Mockupccino/issues"
   },
-  "homepage": "https://github.com/xjuery/Mockupccino#readme"
+  "homepage": "https://github.com/xjuery/Mockupccino#readme",
+  "devDependencies": {
+    "grunt-contrib-uglify": "^0.11.1",
+    "grunt-shell-spawn": "^0.3.10"
+  }
 }

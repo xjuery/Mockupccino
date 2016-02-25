@@ -1,10 +1,10 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="ConfigurationStructure.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 import * as _ from "lodash";
 var yaml = require('js-yaml');
-import Logger = require("./tools/Loggaccino");
+import Logger = require("./Logger");
 
 class Configuration {
     configFile:string;

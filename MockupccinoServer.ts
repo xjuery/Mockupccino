@@ -5,14 +5,14 @@
 /// <reference path="ConfigurationStructure.ts" />
 /// <reference path="Configuration.ts" />
 /// <reference path="Endpoint.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 
 import * as bodyParser from "body-parser";
 import * as multer from "multer";
 import * as _ from "lodash";
 import * as express from "express";
 import Configuration = require("./Configuration");
-import Logger = require("./tools/Loggaccino");
+import Logger = require("./Logger");
 
 class MockupccinoServer {
     expressServer:any;

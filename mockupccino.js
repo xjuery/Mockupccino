@@ -4,12 +4,12 @@
 /// <reference path="ConfigurationStructure.ts" />
 /// <reference path="MockupccinoServer.ts" />
 /// <reference path="Configuration.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 //Application dependencies
 var express = require("express");
 var MockupccinoServer = require("./MockupccinoServer");
 var Configuration = require("./Configuration");
-var Logger = require("./tools/Loggaccino");
+var Logger = require("./Logger");
 exports.App = main(process.argv);
 process.on('uncaughtException', function (err) {
     if (err.errno === 'EADDRINUSE') {

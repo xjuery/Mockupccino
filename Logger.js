@@ -1,7 +1,7 @@
-var MLogger = (function () {
-    function MLogger() {
+var Logger = (function () {
+    function Logger() {
     }
-    MLogger.log = function (type, message) {
+    Logger.log = function (type, message) {
         var today = new Date();
         var dayS = "000" + today.getDate();
         var day = dayS.substring(dayS.length - 2, dayS.length);
@@ -18,19 +18,19 @@ var MLogger = (function () {
         var msecs = ms.substring(ms.length - 3, ms.length);
         console.log("[" + formattedDate + " " + hours + ":" + mins + ":" + secs + "." + msecs + "] : " + type + " : " + message);
     };
-    MLogger.info = function (message) {
-        MLogger.log("INFO", message);
+    Logger.info = function (message) {
+        Logger.log("INFO", message);
     };
-    MLogger.warning = function (message) {
-        MLogger.log("WARNING", message);
+    Logger.warning = function (message) {
+        Logger.log("WARNING", message);
     };
-    MLogger.error = function (message) {
-        MLogger.log("ERROR", message);
+    Logger.error = function (message) {
+        Logger.log("ERROR", message);
     };
-    MLogger.debug = function (message) {
-        MLogger.log("DEBUG", message);
+    Logger.debug = function (message) {
+        Logger.log("DEBUG", message);
     };
-    return MLogger;
+    return Logger;
 })();
-module.exports = MLogger;
-//# sourceMappingURL=Loggaccino.js.map
+module.exports = Logger;
+//# sourceMappingURL=Logger.js.map

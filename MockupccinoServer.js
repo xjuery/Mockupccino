@@ -5,12 +5,12 @@
 /// <reference path="ConfigurationStructure.ts" />
 /// <reference path="Configuration.ts" />
 /// <reference path="Endpoint.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 var bodyParser = require("body-parser");
 var multer = require("multer");
 var _ = require("lodash");
 var express = require("express");
-var Logger = require("./tools/Loggaccino");
+var Logger = require("./Logger");
 var MockupccinoServer = (function () {
     function MockupccinoServer(cfg, app) {
         this.config = cfg;

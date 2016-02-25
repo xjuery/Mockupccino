@@ -1,10 +1,10 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="ConfigurationStructure.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 var _ = require("lodash");
 var yaml = require('js-yaml');
-var Logger = require("./tools/Loggaccino");
+var Logger = require("./Logger");
 var Configuration = (function () {
     function Configuration(cfgFile) {
         this.configFile = cfgFile;

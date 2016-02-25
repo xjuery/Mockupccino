@@ -4,14 +4,14 @@
 /// <reference path="ConfigurationStructure.ts" />
 /// <reference path="MockupccinoServer.ts" />
 /// <reference path="Configuration.ts" />
-/// <reference path="tools/Loggaccino.ts" />
+/// <reference path="Logger.ts" />
 
 //Application dependencies
 import * as express from "express";
 import * as _ from "lodash";
 import MockupccinoServer = require("./MockupccinoServer");
 import Configuration = require("./Configuration");
-import Logger = require("./tools/Loggaccino");
+import Logger = require("./Logger");
 
 export var App = main(process.argv);
 
