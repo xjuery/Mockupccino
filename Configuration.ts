@@ -1,8 +1,10 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="ConfigurationStructure.ts" />
+/// <reference path="tools/Loggaccino.ts" />
 import * as _ from "lodash";
 var yaml = require('js-yaml');
+import Logger = require("./tools/Loggaccino");
 
 class Configuration {
     configFile:string;
@@ -32,12 +34,20 @@ class Configuration {
     };
 
     private parseYAMLConfig(cFile:string):ConfigurationStructure {
+        var parsedConfig: any;
         try {
-            return yaml.safeLoad(require('fs').readFileSync(cFile, 'utf8'));
+            parsedConfig =  yaml.safeLoad(require('fs').readFileSync(cFile, 'utf8'));
+
+            if(!_.isNil(parsedConfig.swagger)){
+                Logger.error("Sorry the Swagger/YAML format is not yet implemented.");
+                return null;
+            }else{
+                return parsedConfig;
+            }
         }
         catch (err) {
             console.log("Unable to find or parse config file.");
-            return;
+            return null;
         }
     }
 

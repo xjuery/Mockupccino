@@ -1,7 +1,8 @@
 Mockupccino - a REST/JSON server simulation tool
 ================================================
 
-[![NPM version](https://img.shields.io/npm/v/js-yaml.svg)](https://www.npmjs.org/package/js-yaml)
+[![NPM version](https://img.shields.io/badge/npm-v3.3.12-brightgreen.svg)](https://www.npmjs.com/package/mockupccino) [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://www.npmjs.com/package/mockupccino)
+
 
 License [LGPL v3](https://github.com/xjuery/Mockupccino/blob/master/LICENSE)
 
