@@ -101,7 +101,7 @@ The following example shows how the config file should look like:
 ```
 ### YAML Format
 ```yaml
--------
+---
   global:
     port: 4000
     staticContent:
@@ -128,7 +128,7 @@ The following example shows how the config file should look like:
     - url: "/test4"
       httpMethod: "DELETE"
       responseFile: "/home/user/myProject/app/test/myTestObject.json"
-``
+```
 In this file, you can find 2 main sections: the global section and the endpoints section.
 
 ### The `global` section
