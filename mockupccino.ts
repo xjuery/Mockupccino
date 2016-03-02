@@ -38,7 +38,8 @@ function main(args:Array<string>) {
     displayLogo();
 
     //Define which config file should be used
-    var configFile:string = './mockupccino-config.json';
+    var configFile:string;
+    //Check if the config file is in the args
     args.forEach(
         (cfg:string, index:number) => {
             if (index === 2) {
@@ -48,6 +49,25 @@ function main(args:Array<string>) {
             }
         }
     );
+    //Check if the config file is the yaml one
+    if (_.isNil(configFile)) {
+        try {
+            require('fs').accessSync('./mockupccino-config.yaml');
+            configFile = './mockupccino-config.yaml';
+            Logger.info("Using default YAML config file format");
+        } catch (err) {
+        }
+    }
+    //Check if the config file is the json one
+    if (_.isNil(configFile)) {
+        try {
+            require('fs').accessSync('./mockupccino-config.json');
+            configFile = './mockupccino-config.json';
+            Logger.info("Using default JSON config file format");
+        } catch (err) {
+        }
+    }
+
 
     //Parse the config file
     var config:Configuration;
@@ -75,7 +95,7 @@ function displayLogo() {
     console.log("|   |   |.-----.----.|  |--.--.--.-----.----.----.|__|.-----.-----.");
     console.log("|       ||  _  |  __||    <|  |  |  _  |  __|  __||  ||     |  _  |");
     console.log("|  |_|__||_____|____||__|__|_____|   __|____|____||__||__|__|_____|");
-    console.log("|__| Mockupccino v1.0.6          |__|");
+    console.log("|__| Mockupccino v1.1.0          |__|");
     console.log("===================================================================");
     console.log("");
 }

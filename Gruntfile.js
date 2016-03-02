@@ -4,6 +4,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-shell-spawn');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.initConfig({
         concat: {
@@ -17,23 +18,23 @@ module.exports = function (grunt) {
                     'ConfigurationStructure.js',
                     'Endpoint.js',
                     'GlobalConfiguration.js',
-                    'mockupccino.js',
                     'MockupccinoServer.js',
-                    'StaticContent.js'
+                    'StaticContent.js',
+                    'mockupccino.js'
                 ],
-                dest: 'build/mockupccino.temp.js'
+                dest: 'mockupccino.temp.js'
             }
         },
 
         shell: {
             replace: {
-                command: 'cat build/mockupccino.temp.js | sed -e \"s/.*require(\\"\\.\\/.*/ /g\" > build/mockupccino.temp2.js',
+                command: 'cat mockupccino.temp.js | sed -e \"s/.*require(\\"\\.\\/.*/ /g\" > mockupccino.temp2.js',
                 options: {
                     async: false
                 }
             },
             addheader: {
-                command: "echo '#!/usr/bin/env node\\n' > build/mockupccino && cat build/mockupccino.temp3.js >> build/mockupccino",
+                command: "echo '#!/usr/bin/env node\\n' > mockupccino && cat mockupccino.temp3.js >> mockupccino",
                 options: {
                     async: false
                 }
@@ -41,14 +42,7 @@ module.exports = function (grunt) {
             },
 
             finalclean: {
-                command: 'rm build/*temp* && chmod +x build/mockupccino',
-                options: {
-                    async: false
-                }
-            },
-
-            firstclean: {
-                command: 'rm -fr build && mkdir build',
+                command: 'rm *temp*.js && chmod +x mockupccino',
                 options: {
                     async: false
                 }
@@ -58,14 +52,13 @@ module.exports = function (grunt) {
         uglify: {
             my_target: {
                 files: {
-                    'build/mockupccino.temp3.js': ['build/mockupccino.temp2.js']
+                    'mockupccino.temp3.js': ['mockupccino.temp2.js']
                 }
             }
         }
     });
 
     grunt.registerTask('build', [
-        'shell:firstclean',
         'concat',
         'shell:replace',
         'uglify',

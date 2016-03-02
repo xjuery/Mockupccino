@@ -58,7 +58,8 @@ shell: {
 
 ##The configuration file
 The following example shows how the config file should look like:
-```
+### JSON Format
+```json
 {
     "global":{
         "port": 4000,
@@ -98,8 +99,37 @@ The following example shows how the config file should look like:
     ]
 }
 ```
+### YAML Format
+```yaml
+-------
+  global:
+    port: 4000
+    staticContent:
+      - url: "/"
+        path: "/home/user/myProject/app"
 
-First thing to notice is that the file format is, currently, JSON. In this file, you can find 2 main sections: the global section and the endpoints section.
+      - url: "/styles"
+        path: "/home/user/myProject/.tmp/styles"
+
+  endpoints:
+    - url: "/test1"
+      httpMethod: "GET"
+      loadSim: 5000
+      response:  {"msg":"Test1 OK", "ReturnCode":"200"}
+
+    - url: "/test2"
+      httpMethod: "POST"
+      response: "Everything is OK"
+
+    - url: "/test3"
+      httpMethod: "PUT"
+      response: {"msg":"Test 3 is ok also", "ReturnCode":"200"}
+
+    - url: "/test4"
+      httpMethod: "DELETE"
+      responseFile: "/home/user/myProject/app/test/myTestObject.json"
+``
+In this file, you can find 2 main sections: the global section and the endpoints section.
 
 ### The `global` section
 

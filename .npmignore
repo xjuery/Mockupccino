@@ -1,3 +1,11 @@
-config.json
+defs
+node_modules
+.gitignore
+*.ts
+*.js
+*.js.map
+mockupccino.json
+mockupccino-config.yaml
+swagger-config.yaml
 .idea
 

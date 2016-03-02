@@ -89,28 +89,28 @@ class MockupccinoServer {
                     this.endpointCallback(element, res);
                 }
             );
-            Logger.info("Adding: POST : " + element.url);
+            Logger.info("   |--> Adding : POST   : " + element.url);
         } else if (element.httpMethod === "PUT") {
             this.expressServer.put(element.url,
                 (req:any, res:any) => {
                     this.endpointCallback(element, res);
                 }
             );
-            Logger.info("Adding: PUT : " + element.url);
+            Logger.info("   |--> Adding : PUT    : " + element.url);
         } else if (element.httpMethod === "DELETE") {
             this.expressServer.delete(element.url,
                 (req:any, res:any) => {
                     this.endpointCallback(element, res);
                 }
             );
-            Logger.info("Adding: DELETE : " + element.url);
+            Logger.info("   |--> Adding : DELETE : " + element.url);
         } else {//GET
             this.expressServer.get(element.url,
                 (req:any, res:any) => {
                     this.endpointCallback(element, res);
                 }
             );
-            Logger.info("Adding: GET : " + element.url);
+            Logger.info("   |--> Adding : GET    : " + element.url);
         }
     }
 
@@ -202,7 +202,7 @@ class MockupccinoServer {
                 res.send("");
             }
         );
-        Logger.info("Adding: POST : /populate");
+        Logger.info("   °--> Adding : POST   : /populate");
     }
 }
 
