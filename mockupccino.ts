@@ -1,17 +1,13 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/express/express.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
-/// <reference path="ConfigurationStructure.ts" />
-/// <reference path="MockupccinoServer.ts" />
-/// <reference path="Configuration.ts" />
-/// <reference path="Logger.ts" />
 
 //Application dependencies
 import * as express from "express";
 import * as _ from "lodash";
-import MockupccinoServer = require("./MockupccinoServer");
-import Configuration = require("./Configuration");
-import Logger = require("./Logger");
+import {MockupccinoServer} from './MockupccinoServer';
+import {Configuration} from './Configuration';
+import {Logger} from './Logger';
 
 export var App = main(process.argv);
 

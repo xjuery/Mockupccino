@@ -1,12 +1,13 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
-/// <reference path="ConfigurationStructure.ts" />
-/// <reference path="Logger.ts" />
-import * as _ from "lodash";
-var yaml = require('js-yaml');
-import Logger = require("./Logger");
 
-class Configuration {
+import * as _ from 'lodash';
+var yaml = require('js-yaml');
+import {Logger} from './Logger';
+import {ConfigurationStructure} from './ConfigurationStructure';
+import {Endpoint} from './Endpoint';
+
+export class Configuration {
     configFile:string;
     configuration:ConfigurationStructure;
 
@@ -15,7 +16,7 @@ class Configuration {
         this.load();
     }
 
-    load() {
+    public load():void {
         if(_.endsWith(this.configFile, ".json")){
             this.configuration = this.parseJSONConfig(this.configFile);
         } else if(_.endsWith(this.configFile, ".yaml")){
@@ -51,7 +52,7 @@ class Configuration {
         }
     }
 
-    isValid():boolean {
+    public isValid():boolean {
         if (!_.isNil(this.configuration)) {
             return this.configuration.endpoints.length > 0;
         }
@@ -59,7 +60,7 @@ class Configuration {
         return false;
     }
 
-    getEndpoints():Endpoint[] {
+    public getEndpoints():Endpoint[] {
         if (!_.isNil(this.configuration)) {
             if (this.configuration.endpoints.length > 0) {
                 return this.configuration.endpoints;
@@ -69,7 +70,7 @@ class Configuration {
         return null;
     }
 
-    getGlobalConfig():GlobalConfiguration {
+    public getGlobalConfig():GlobalConfiguration {
         if (!_.isNil(this.configuration)) {
             if (!_.isNil(this.configuration.global)) {
                 return this.configuration.global;
@@ -79,5 +80,3 @@ class Configuration {
         return null;
     }
 }
-
-export = Configuration;

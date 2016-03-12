@@ -2,19 +2,16 @@
 /// <reference path="defs/body-parser/body-parser.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
 /// <reference path="defs/express/express.d.ts" />
-/// <reference path="ConfigurationStructure.ts" />
-/// <reference path="Configuration.ts" />
-/// <reference path="Endpoint.ts" />
-/// <reference path="Logger.ts" />
 
 import * as bodyParser from "body-parser";
 import * as multer from "multer";
 import * as _ from "lodash";
 import * as express from "express";
-import Configuration = require("./Configuration");
-import Logger = require("./Logger");
+import {Configuration} from './Configuration';
+import {Logger} from './Logger';
+import {Endpoint} from './Endpoint';
 
-class MockupccinoServer {
+export class MockupccinoServer {
     expressServer:any;
     config:Configuration;
     dataCache:string[];
@@ -205,5 +202,3 @@ class MockupccinoServer {
         Logger.info("   °--> Adding : POST   : /populate");
     }
 }
-
-export = MockupccinoServer;

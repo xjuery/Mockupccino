@@ -27,14 +27,8 @@ module.exports = function (grunt) {
         },
 
         shell: {
-            replace: {
-                command: 'cat mockupccino.temp.js | sed -e \"s/.*require(\\"\\.\\/.*/ /g\" > mockupccino.temp2.js',
-                options: {
-                    async: false
-                }
-            },
             addheader: {
-                command: "echo '#!/usr/bin/env node\\n' > mockupccino && cat mockupccino.temp3.js >> mockupccino",
+                command: "echo '#!/usr/bin/env node\\n' > mockupccino && cat mockupccino.temp1.js >> mockupccino",
                 options: {
                     async: false
                 }
@@ -52,7 +46,7 @@ module.exports = function (grunt) {
         uglify: {
             my_target: {
                 files: {
-                    'mockupccino.temp3.js': ['mockupccino.temp2.js']
+                    'mockupccino.temp1.js': ['mockupccino.temp.js']
                 }
             }
         }
@@ -60,7 +54,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'concat',
-        'shell:replace',
         'uglify',
         'shell:addheader',
         'shell:finalclean'

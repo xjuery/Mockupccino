@@ -1,6 +1,7 @@
-/// <reference path="GlobalConfiguration.ts" />
-/// <reference path="Endpoint.ts" />
-interface ConfigurationStructure{
+import {Endpoint} from './Endpoint';
+import {GlobalConfiguration} from './GlobalConfiguration';
+
+export class ConfigurationStructure{
     global: GlobalConfiguration;
     endpoints: Array<Endpoint>;
 }

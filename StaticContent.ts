@@ -1,4 +1,4 @@
-interface StaticContent{
+export class StaticContent{
     url: string;
     path: string;
 }

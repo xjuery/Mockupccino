@@ -1,4 +1,4 @@
-class Logger {
+export class Logger {
     private static log(type:string, message:string):void{
         var today = new Date();
         var dayS = "000" + today.getDate();
@@ -35,5 +35,3 @@ class Logger {
         Logger.log("DEBUG", message);
     }
 }
-
-export = Logger;

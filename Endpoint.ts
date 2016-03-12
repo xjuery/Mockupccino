@@ -1,8 +1,7 @@
-/// <reference path="GlobalConfiguration.ts" />
-interface Endpoint{
+export class Endpoint {
     url: string;
     httpMethod: string;
     loadSim: number;
-    response?: string;
-    responseFile?: string;
+    response: string;
+    responseFile: string;
 }
