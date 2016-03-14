@@ -1,4 +1,4 @@
-import {StaticContent} from './StaticContent';
+import {StaticContent} from "./StaticContent";
 
 export class GlobalConfiguration {
     port: number;

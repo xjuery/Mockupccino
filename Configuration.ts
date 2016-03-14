@@ -1,32 +1,34 @@
 /// <reference path="defs/node/node.d.ts" />
 /// <reference path="defs/lodash/lodash.d.ts" />
+/// <reference path="defs/js-yaml/js-yaml.d.ts" />
 
-import * as _ from 'lodash';
-var yaml = require('js-yaml');
-import {Logger} from './Logger';
-import {ConfigurationStructure} from './ConfigurationStructure';
-import {Endpoint} from './Endpoint';
+import * as _ from "lodash";
+import * as yaml from "js-yaml";
+import {Logger} from "./Logger";
+import {ConfigurationStructure} from "./ConfigurationStructure";
+import {Endpoint} from "./Endpoint";
+import {GlobalConfiguration} from "./GlobalConfiguration";
 
 export class Configuration {
-    configFile:string;
-    configuration:ConfigurationStructure;
+    configFile: string;
+    configuration: ConfigurationStructure;
 
-    constructor(cfgFile:string) {
+    constructor(cfgFile: string) {
         this.configFile = cfgFile;
         this.load();
     }
 
-    public load():void {
-        if(_.endsWith(this.configFile, ".json")){
+    public load(): void {
+        if (_.endsWith(this.configFile, ".json")) {
             this.configuration = this.parseJSONConfig(this.configFile);
-        } else if(_.endsWith(this.configFile, ".yaml")){
+        } else if (_.endsWith(this.configFile, ".yaml")) {
             this.configuration = this.parseYAMLConfig(this.configFile);
         }
     }
 
-    private parseJSONConfig(cFile:string):ConfigurationStructure {
+    private parseJSONConfig(cFile: string): ConfigurationStructure {
         try {
-            return JSON.parse(require('fs').readFileSync(cFile, 'utf8'));
+            return JSON.parse(require("fs").readFileSync(cFile, "utf8"));
         }
         catch (err) {
             console.log("Unable to find or parse config file.");
@@ -34,15 +36,15 @@ export class Configuration {
         }
     };
 
-    private parseYAMLConfig(cFile:string):ConfigurationStructure {
-        var parsedConfig: any;
+    private parseYAMLConfig(cFile: string): ConfigurationStructure {
+        let parsedConfig: any;
         try {
-            parsedConfig =  yaml.safeLoad(require('fs').readFileSync(cFile, 'utf8'));
+            parsedConfig =  yaml.safeLoad(require("fs").readFileSync(cFile, "utf8"));
 
-            if(!_.isNil(parsedConfig.swagger)){
+            if (!_.isNil(parsedConfig.swagger)) {
                 Logger.error("Sorry the Swagger/YAML format is not yet implemented.");
                 return null;
-            }else{
+            } else {
                 return parsedConfig;
             }
         }
@@ -52,7 +54,7 @@ export class Configuration {
         }
     }
 
-    public isValid():boolean {
+    public isValid(): boolean {
         if (!_.isNil(this.configuration)) {
             return this.configuration.endpoints.length > 0;
         }
@@ -60,7 +62,7 @@ export class Configuration {
         return false;
     }
 
-    public getEndpoints():Endpoint[] {
+    public getEndpoints(): Endpoint[] {
         if (!_.isNil(this.configuration)) {
             if (this.configuration.endpoints.length > 0) {
                 return this.configuration.endpoints;
@@ -70,7 +72,7 @@ export class Configuration {
         return null;
     }
 
-    public getGlobalConfig():GlobalConfiguration {
+    public getGlobalConfig(): GlobalConfiguration {
         if (!_.isNil(this.configuration)) {
             if (!_.isNil(this.configuration.global)) {
                 return this.configuration.global;

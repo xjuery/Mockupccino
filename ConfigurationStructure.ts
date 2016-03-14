@@ -1,7 +1,7 @@
-import {Endpoint} from './Endpoint';
-import {GlobalConfiguration} from './GlobalConfiguration';
+import {Endpoint} from "./Endpoint";
+import {GlobalConfiguration} from "./GlobalConfiguration";
 
-export class ConfigurationStructure{
+export class ConfigurationStructure {
     global: GlobalConfiguration;
     endpoints: Array<Endpoint>;
 }
