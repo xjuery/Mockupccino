@@ -1,15 +1,11 @@
-/// <reference path="defs/node/node.d.ts" />
-/// <reference path="defs/lodash/lodash.d.ts" />
-/// <reference path="defs/js-yaml/js-yaml.d.ts" />
-
 import * as _ from "lodash";
 import * as yaml from "js-yaml";
-import {Logger} from "./Logger";
-import {ConfigurationStructure} from "./ConfigurationStructure";
-import {Endpoint} from "./Endpoint";
-import {GlobalConfiguration} from "./GlobalConfiguration";
+import Logger = require("./Logger");
+import ConfigurationStructure = require("./ConfigurationStructure");
+import Endpoint = require("./Endpoint");
+import GlobalConfiguration = require("./GlobalConfiguration");
 
-export class Configuration {
+class Configuration {
     configFile: string;
     configuration: ConfigurationStructure;
 
@@ -39,7 +35,7 @@ export class Configuration {
     private parseYAMLConfig(cFile: string): ConfigurationStructure {
         let parsedConfig: any;
         try {
-            parsedConfig =  yaml.safeLoad(require("fs").readFileSync(cFile, "utf8"));
+            parsedConfig = yaml.safeLoad(require("fs").readFileSync(cFile, "utf8"));
 
             if (!_.isNil(parsedConfig.swagger)) {
                 Logger.error("Sorry the Swagger/YAML format is not yet implemented.");
@@ -82,3 +78,4 @@ export class Configuration {
         return null;
     }
 }
+export = Configuration;

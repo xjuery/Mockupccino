@@ -1,13 +1,8 @@
-/// <reference path="defs/node/node.d.ts" />
-/// <reference path="defs/express/express.d.ts" />
-/// <reference path="defs/lodash/lodash.d.ts" />
-
-// Application dependencies
 import * as express from "express";
 import * as _ from "lodash";
-import {MockupccinoServer} from "./MockupccinoServer";
-import {Configuration} from "./Configuration";
-import {Logger} from "./Logger";
+import Logger = require("./Logger");
+import Configuration = require("./Configuration");
+import MockupccinoServer = require("./MockupccinoServer");
 
 export var App = main(process.argv);
 
@@ -27,7 +22,7 @@ process.on("uncaughtException",
  * @param args The arguments provided in the CLI
  */
 function main(args: Array<string>) {
-    // Instanciate of the express server
+    // Instanciate the express server
     let expressApp = express();
 
     // display the logo

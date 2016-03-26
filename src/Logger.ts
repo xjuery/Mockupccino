@@ -1,4 +1,4 @@
-export class Logger {
+class Logger {
     private static log(type: string, message: string): void {
         let today = new Date();
         let dayS = "000" + today.getDate();
@@ -16,7 +16,7 @@ export class Logger {
         let ms = "000" + today.getMilliseconds();
         let msecs = ms.substring(ms.length - 3, ms.length);
 
-        console.log("[" + formattedDate + " " + hours + ":" + mins + ":" + secs + "." + msecs + "] :  " + type + " : " + message);
+        console.log("[" + formattedDate + " " + hours + ":" + mins + ":" + secs + "." + msecs + "] : " + type + " : " + message);
     }
 
     public static info(message: string): void {
@@ -35,3 +35,4 @@ export class Logger {
         Logger.log("DEBUG", message);
     }
 }
+export = Logger;

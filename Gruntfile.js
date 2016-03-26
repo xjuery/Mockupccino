@@ -13,40 +13,46 @@ module.exports = function (grunt) {
             },
             dist: {
                 src: [
-                    'Logger.js',
-                    'Configuration.js',
-                    'ConfigurationStructure.js',
-                    'Endpoint.js',
-                    'GlobalConfiguration.js',
-                    'MockupccinoServer.js',
-                    'StaticContent.js',
-                    'mockupccino.js'
+                    'src/Configuration.js',
+                    'src/ConfigurationStructure.js',
+                    'src/Endpoint.js',
+                    'src/GlobalConfiguration.js',
+                    'src/Logger.js',
+                    'src/MockupccinoServer.js',
+                    'src/StaticContent.js',
+                    'src/Main.js'
                 ],
-                dest: 'mockupccino.temp.js'
-            }
-        },
-
-        shell: {
-            addheader: {
-                command: "echo '#!/usr/bin/env node\\n' > mockupccino && cat mockupccino.temp1.js >> mockupccino",
-                options: {
-                    async: false
-                }
-
-            },
-
-            finalclean: {
-                command: 'rm *temp*.js && chmod +x mockupccino',
-                options: {
-                    async: false
-                }
+                dest: 'bin/mockupccino.temp.js'
             }
         },
 
         uglify: {
             my_target: {
                 files: {
-                    'mockupccino.temp1.js': ['mockupccino.temp.js']
+                    'bin/mockupccino.temp3.js': ['bin/mockupccino.temp2.js']
+                }
+            }
+        },
+
+        shell: {
+            cleanrequired: {
+                command: 'cat bin/mockupccino.temp.js | sed -e \"s/.*require(\\"\\.\\/.*/ /g\" > bin/mockupccino.temp2.js',
+                options: {
+                    async: false
+                }
+            },
+
+            addheader: {
+                command: "echo '#!/usr/bin/env node\\n' > bin/mockupccino && cat bin/mockupccino.temp3.js >> bin/mockupccino",
+                options: {
+                    async: false
+                }
+            },
+
+            finalclean: {
+                command: 'rm bin/*temp*.js && chmod +x bin/mockupccino',
+                options: {
+                    async: false
                 }
             }
         }
@@ -54,6 +60,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'concat',
+        'shell:cleanrequired',
         'uglify',
         'shell:addheader',
         'shell:finalclean'

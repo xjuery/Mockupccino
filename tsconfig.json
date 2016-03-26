@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "sourceMap": true,
+    "removeComments": true,
+    "outDir": "src/"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "typings/main.d.ts",
+    "src/Configuration.ts",
+    "src/ConfigurationStructure.ts",
+    "src/Endpoint.ts",
+    "src/GlobalConfiguration.ts",
+    "src/Logger.ts",
+    "src/Main.ts",
+    "src/MockupccinoServer.ts",
+    "src/StaticContent.ts"
+  ]
+}
