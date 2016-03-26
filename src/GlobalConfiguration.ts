@@ -1,7 +1,6 @@
-import StaticContent = require("./StaticContent");
+import {StaticContent} from "./StaticContent";
 
-class GlobalConfiguration {
+export class GlobalConfiguration {
     port: number;
     staticContent: Array<StaticContent>;
 }
-export = GlobalConfiguration;

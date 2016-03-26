@@ -1,8 +1,7 @@
-import Endpoint = require("./Endpoint");
-import GlobalConfiguration = require("./GlobalConfiguration");
+import {GlobalConfiguration} from "./GlobalConfiguration";
+import {Endpoint} from "./Endpoint";
 
-class ConfigurationStructure {
+export class ConfigurationStructure {
     global: GlobalConfiguration;
     endpoints: Array<Endpoint>;
 }
-export = ConfigurationStructure;

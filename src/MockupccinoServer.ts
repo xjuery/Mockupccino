@@ -2,11 +2,11 @@ import * as bodyParser from "body-parser";
 import * as multer from "multer";
 import * as _ from "lodash";
 import * as express from "express";
-import Configuration = require("./Configuration");
-import Endpoint = require("./Endpoint");
-import Logger = require("./Logger");
+import {Configuration} from "./Configuration";
+import {Endpoint} from "./Endpoint";
+import {Logger} from "./Logger";
 
-class MockupccinoServer {
+export class MockupccinoServer {
     expressServer: any;
     config: Configuration;
     dataCache: string[];
@@ -18,8 +18,6 @@ class MockupccinoServer {
     }
 
     launch() {
-        this.config.load();
-
         // Add each endpoints
         this.config.getEndpoints().forEach(
             (ep: Endpoint) => {
@@ -28,7 +26,6 @@ class MockupccinoServer {
         );
 
         // Add the special endpoint for populating specific responses in the endpoints
-        // TODO: Add the special endpoint for populating specific responses in the endpoints
         this.populateEndpoint();
 
         // Add static files if needed
@@ -123,7 +120,7 @@ class MockupccinoServer {
         let myResp: string;
         myResp = this.dataCache[url + "-" + method];
         if (_.isNil(myResp)) {
-            this.config.load();
+            this.config.reloadEndpoints();
 
             this.config.getEndpoints().forEach(
                 (element: any) => {
@@ -146,7 +143,7 @@ class MockupccinoServer {
     }
 
     private getStatusCodeForEndPoint(url: string, method: string): number {
-        this.config.load();
+        this.config.reloadEndpoints();
 
         let code: number = 500;
         this.config.getEndpoints().forEach(
@@ -183,4 +180,3 @@ class MockupccinoServer {
         Logger.info("   °--> Adding : POST   : /populate");
     }
 }
-export = MockupccinoServer;

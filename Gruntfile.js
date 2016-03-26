@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                     'src/Logger.js',
                     'src/MockupccinoServer.js',
                     'src/StaticContent.js',
-                    'src/Main.js'
+                    'src/mockupccino.js'
                 ],
                 dest: 'bin/mockupccino.temp.js'
             }

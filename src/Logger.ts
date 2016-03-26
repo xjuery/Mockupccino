@@ -1,5 +1,11 @@
-class Logger {
-    private static log(type: string, message: string): void {
+import * as chalk from "chalk";
+
+export class Logger {
+    private static display(date: string, type: string, message: string): void {
+        console.log(date + " : " + type + " : " + message);
+    }
+
+    private static getDate(): string {
         let today = new Date();
         let dayS = "000" + today.getDate();
         let day = dayS.substring(dayS.length - 2, dayS.length);
@@ -16,23 +22,22 @@ class Logger {
         let ms = "000" + today.getMilliseconds();
         let msecs = ms.substring(ms.length - 3, ms.length);
 
-        console.log("[" + formattedDate + " " + hours + ":" + mins + ":" + secs + "." + msecs + "] : " + type + " : " + message);
+        return "[" + formattedDate + " " + hours + ":" + mins + ":" + secs + "." + msecs + "]";
     }
 
     public static info(message: string): void {
-        Logger.log("INFO", message);
+        Logger.display(chalk.green(Logger.getDate()), chalk.green("INFO"), chalk.green(message));
     }
 
     public static warning(message: string): void {
-        Logger.log("WARNING", message);
+        Logger.display(chalk.yellow(Logger.getDate()), chalk.yellow("WARNING"), chalk.yellow(message));
     }
 
     public static error(message: string): void {
-        Logger.log("ERROR", message);
+        Logger.display(chalk.red(Logger.getDate()), chalk.red("ERROR"), chalk.red(message));
     }
 
     public static debug(message: string): void {
-        Logger.log("DEBUG", message);
+        Logger.display(chalk.blue(Logger.getDate()), chalk.blue("DEBUG"), chalk.blue(message));
     }
 }
-export = Logger;

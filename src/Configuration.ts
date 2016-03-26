@@ -1,24 +1,41 @@
 import * as _ from "lodash";
 import * as yaml from "js-yaml";
-import Logger = require("./Logger");
-import ConfigurationStructure = require("./ConfigurationStructure");
-import Endpoint = require("./Endpoint");
-import GlobalConfiguration = require("./GlobalConfiguration");
+import {ConfigurationStructure} from "./ConfigurationStructure";
+import {Logger} from "./Logger";
+import {Endpoint} from "./Endpoint";
+import {GlobalConfiguration} from "./GlobalConfiguration";
 
-class Configuration {
+export class Configuration {
     configFile: string;
-    configuration: ConfigurationStructure;
+    // configuration: ConfigurationStructure;
+    global: GlobalConfiguration;
+    endpoints: Array<Endpoint>;
 
     constructor(cfgFile: string) {
         this.configFile = cfgFile;
         this.load();
     }
 
-    public load(): void {
+    private load(): void {
+        let conf = this.loadFile(this.configFile);
+        this.global = conf.global;
+        this.endpoints = conf.endpoints;
+    }
+
+    public reloadEndpoints(): void {
+        let conf = this.loadFile(this.configFile);
+        this.endpoints = conf.endpoints;
+    }
+
+    public setPort(port: number): void {
+        this.global.port = port;
+    }
+
+    private loadFile(conf: string): ConfigurationStructure {
         if (_.endsWith(this.configFile, ".json")) {
-            this.configuration = this.parseJSONConfig(this.configFile);
+            return this.parseJSONConfig(this.configFile);
         } else if (_.endsWith(this.configFile, ".yaml")) {
-            this.configuration = this.parseYAMLConfig(this.configFile);
+            return this.parseYAMLConfig(this.configFile);
         }
     }
 
@@ -51,17 +68,17 @@ class Configuration {
     }
 
     public isValid(): boolean {
-        if (!_.isNil(this.configuration)) {
-            return this.configuration.endpoints.length > 0;
+        if (!_.isNil(this.endpoints)) {
+            return this.endpoints.length > 0;
         }
 
         return false;
     }
 
     public getEndpoints(): Endpoint[] {
-        if (!_.isNil(this.configuration)) {
-            if (this.configuration.endpoints.length > 0) {
-                return this.configuration.endpoints;
+        if (!_.isNil(this.endpoints)) {
+            if (this.endpoints.length > 0) {
+                return this.endpoints;
             }
         }
 
@@ -69,13 +86,12 @@ class Configuration {
     }
 
     public getGlobalConfig(): GlobalConfiguration {
-        if (!_.isNil(this.configuration)) {
-            if (!_.isNil(this.configuration.global)) {
-                return this.configuration.global;
+        if (!_.isNil(this.global)) {
+            if (!_.isNil(this.global)) {
+                return this.global;
             }
         }
 
         return null;
     }
 }
-export = Configuration;
