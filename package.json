@@ -4,14 +4,14 @@
   "description": "A REST/JSON simulation server",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node Main.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xjuery/Mockupccino.git"
   },
   "bin": {
-    "mockupccino": "mockupccino"
+    "mockupccino": "./bin/Main.js"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -31,6 +31,7 @@
     "commander": "^2.9.0",
     "debug": "~2.2.0",
     "express": "~4.13.1",
+    "inquirer": "^0.12.0",
     "js-yaml": "~3.5.3",
     "lodash": "~4.3.0",
     "multer": "~1.1.0"
@@ -42,8 +43,10 @@
   },
   "homepage": "https://github.com/xjuery/Mockupccino#readme",
   "devDependencies": {
+    "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^0.11.1",
-    "grunt-shell-spawn": "^0.3.10"
+    "grunt-shell-spawn": "^0.3.10",
+    "grunt-typescript": "^0.8.0"
   }
 }

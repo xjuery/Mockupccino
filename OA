@@ -1,0 +1,31 @@
+man(1)                                                                        mockupccino man page                                                                       man(1)
+
+NNAAMMEE
+       mockupccino - creates a REST/JSON server simulation tool which allow developers to test their REST clients.
+
+SSYYNNOOPPSSIISS
+       mockupccino [OPTIONS] [CONFIGURATIONFILE]
+
+DDEESSCCRRIIPPTTIIOONN
+       Mockupccino is a REST/JSON server simulation tool which allow developers to test their REST clients.
+
+       Mockupccino  doesn't  require  any  intrusive  configuration into your projects, just run Mockupccino with its configuration file and that's all.  The main objective of
+       Mockupccino is to prevent your projects from the risk of webservices connection bugs that could be caused by an intrusive faulty configuration.  Its use was thought  to
+       be as simple as possible, you just have to create a file that describes how the REST webservice must respond and launch the Mockupccino server.
+
+OOPPTTIIOONNSS
+       --hh,,--help
+                    output usage information --VV,,--version
+                 output the version number --pp,,--port _P_O_R_T
+                the server port
+
+SSEEEE AALLSSOO
+       https://github.com/xjuery/Mockupccino
+
+BBUUGGSS
+       No known bugs.
+
+AAUUTTHHOORR
+       Xavier JUERY (xavier@juery.fr)
+
+1.0                                                                              26 april 2016                                                                           man(1)

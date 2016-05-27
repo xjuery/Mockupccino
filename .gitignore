@@ -38,7 +38,7 @@ ConfigurationStructure.js
 Endpoint.js
 GlobalConfiguration.js
 Logger.js
-mockupccino.js
+Main.js
 MockupccinoServer.js
 StaticContent.js
 swagger-config.yaml

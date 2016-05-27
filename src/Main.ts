@@ -102,15 +102,15 @@ function main(args: Array<string>) {
  */
 function displayLogo(version: string) {
     // Prepare the version variable
-    let newV = version + "                 ";
-    let newVersion = newV.substring(0, 16);
+    let newV = version + "                      ";
+    let newVersion = newV.substring(0, 19);
 
-    // Display the logo and Mockupccino info
-    console.log(chalk.green(" _______              __    ") + chalk.white("                  ") + chalk.green("       __"));
-    console.log(chalk.green("|   |   |.-----.----.|  |--.") + chalk.white(".--.--.-----.----.") + chalk.green(".----.|__|.-----.-----."));
-    console.log(chalk.green("|       ||  _  |  __||    <|") + chalk.white("|  |  |  _  |  __|") + chalk.green("|  __||  ||     |  _  |"));
-    console.log(chalk.green("|  |_|__||_____|____||__|__|") + chalk.white("|_____|   __|____|") + chalk.green("|____||__||__|__|_____|"));
-    console.log(chalk.green("|__|") + chalk.cyan(" Mockupccino v" + newVersion) + chalk.white("|__|"));
-    console.log(chalk.green("============================") + chalk.white("==================") + chalk.green("======================="));
+    // Display the logo and Mockupccino info chalk.green(
+    console.log(chalk.green(" _______ ") + chalk.white("       ") + chalk.green("      ") + chalk.white(" __    ") + chalk.green("       ") + chalk.white("       ") + chalk.green("      ") + chalk.white("      ") + chalk.green(" __"));
+    console.log(chalk.green("|   |   |") + chalk.white(".-----.") + chalk.green(".----.") + chalk.white("|  |--.") + chalk.green(".--.--.") + chalk.white(".-----.") + chalk.green(".----.") + chalk.white(".----.") + chalk.green("|__|") + chalk.white(".-----.") + chalk.green(".-----."));
+    console.log(chalk.green("|       |") + chalk.white("|  _  |") + chalk.green("|  __|") + chalk.white("|    <|") + chalk.green("|  |  |") + chalk.white("|  _  |") + chalk.green("|  __|") + chalk.white("|  __|") + chalk.green("|  |") + chalk.white("|     |") + chalk.green("|  _  |"));
+    console.log(chalk.green("|  |_|__|") + chalk.white("|_____|") + chalk.green("|____|") + chalk.white("|__|__|") + chalk.green("|_____|") + chalk.white("|   __|") + chalk.green("|____|") + chalk.white("|____|") + chalk.green("|__|") + chalk.white("|__|__|") + chalk.green("|_____|"));
+    console.log(chalk.green("|__|") + chalk.cyan("Mockupccino v" + newVersion) + chalk.white("|__|"));
+    console.log(chalk.green("========================================================================="));
     console.log(" ");
 }

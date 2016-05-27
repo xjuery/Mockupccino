@@ -8,4 +8,5 @@
 /// <reference path="main/ambient/node/index.d.ts" />
 /// <reference path="main/ambient/serve-static/index.d.ts" />
 /// <reference path="main/definitions/chalk/index.d.ts" />
+/// <reference path="main/definitions/inquirer/index.d.ts" />
 /// <reference path="main/definitions/lodash/index.d.ts" />
