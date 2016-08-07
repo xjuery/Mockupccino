@@ -34,6 +34,24 @@ npm install -g mockupccino
 Usage
 -----
 
+### Getting some help
+
+Simplify type the following command:
+```
+mockupccino --help
+```
+Then you'll see some info about the command line arguments: 
+```
+  Usage: mockupccino [options] [configurationfile]
+
+  Options:
+
+    -h, --help      output usage information
+    -V, --version   output the version number
+    -p, --port <n>  the server port
+```
+
+
 ### Launching the server in a terminal
 ```
 mockupccino <config file>
@@ -101,7 +119,6 @@ The following example shows how the config file should look like:
 ```
 ### YAML Format
 ```yaml
----
   global:
     port: 4000
     staticContent:
@@ -148,9 +165,43 @@ This section is an array of the different endpoints that should be exposed by th
 
 Pay attention, there should be at least, and no more than, one of the response* attribute.
 
+## Populate test data
+
+As you probably noticed, the configuration file of Mockupccino allows you to define test data that will be used as a response (for a given url) by the internal server.
+But what if you want to dynamically populate those test data during your tests?
+This is possible thanks to the special populate endpoint.
+If you have a look at the command line logs when you start a Mockupccino server, you probably already noticed that one endpoint has been automatically added to the list you have provided.
+This specific endpoint allows you send data to the internal data cache of Mockupccino. This data will then be used by the server as a response.
+
+If you want to populate the internal data cache of mockupccino, simply POST data to the `/populate` endpoint with the following structure, in the body of the REST request:
+```
+{
+    "url": "<url that will have to answer the following data>",
+    "method": "<HTTP method of the endpoint>",
+    "object": "<object that will be send back by mockupccino once the URL and http method are requested>"
+}
+```
+Be sure that the specifed URL and HTTP method are also declared as endpoint in the endpoint section of the configuration file.
+
+For example:
+In the endpoint section of the configuration file:
+```
+ - u,rl: "/test2"
+      httpMethod: "POST"
+      response: "Everything is OK"
+```
+I can then send a POST request to the /populate endpoint with the following body:
+```
+{
+    "url": "/test2",
+    "method": "POST",
+    "object": "Overridden message"
+}
+```
+
+Now, each time we request the `/test2` endpoint with the `POST` HTTP Method, the answer will be `Overridden message`.
+
 ##Future features
 1. Ability to configure the CORS Headers
 2. Ability to use a YAML/Swagger config file
-3. grunt/gulp module
-4. CLI interface for creating the config file
 
