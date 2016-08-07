@@ -6,7 +6,7 @@ import {Configuration} from "./Configuration";
 import {Endpoint} from "./Endpoint";
 import {Logger} from "./Logger";
 
-export class MockupccinoServer {
+export class InternalServer {
     expressServer: any;
     config: Configuration;
     dataCache: string[];
@@ -42,7 +42,7 @@ export class MockupccinoServer {
                 );
             }
 
-            // Set the Mockupccino server port
+            // Set the internal server port
             if (!_.isNil(this.config.getGlobalConfig().port)) {
                 this.expressServer.listen(this.config.getGlobalConfig().port);
 

@@ -19,10 +19,10 @@ module.exports = function (grunt) {
         //             'src/Endpoint.js',
         //             'src/GlobalConfiguration.js',
         //             'src/Logger.js',
-        //             'src/MockupccinoServer.js',
+        //             'src/InternalServer.js',
         //             'src/ConfigCreator.js',
         //             'src/StaticContent.js',
-        //             'src/Main.js'
+        //             'src/Mockupccino.js'
         //         ],
         //         dest: 'bin/mockupccino.temp.js'
         //     }
@@ -61,10 +61,10 @@ module.exports = function (grunt) {
 
         uglify: {
             dist: {
-                options: {
+                /*options: {
                     sourceMap: './bin/mockupccino.map',
                     sourceMapRoot: './src/'
-                },
+                },*/
                 files: {
                     './bin/mockupccino.js': [
                         'src/Configuration.js',
@@ -72,10 +72,10 @@ module.exports = function (grunt) {
                         'src/Endpoint.js',
                         'src/GlobalConfiguration.js',
                         'src/Logger.js',
-                        'src/MockupccinoServer.js',
+                        'src/InternalServer.js',
                         'src/ConfigCreator.js',
                         'src/StaticContent.js',
-                        'src/Main.js'
+                        'src/Mockupccino.js'
                     ]
                 }
             }
@@ -83,12 +83,12 @@ module.exports = function (grunt) {
         typescript: {
             base: {
                 src: ['**/*.ts'],
-                dest: './bin/main.js',
+                dest: './bin'/*,
                 options: {
                     module: 'commonjs',
                     sourcemap: true,
                     declaration: false
-                }
+                }*/
             }
 
         }

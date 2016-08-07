@@ -23,15 +23,15 @@ process.on("uncaughtException", (err: any) => {
  * @param args The arguments provided in the CLI
  */
 function main(args: Array<string>) {
-    let version = "1.1.0";
+    let version = "1.2.0";
     let configFile: string;
 
     // display the logo
     displayLogo(version);
 
     // Parse the command-line
-    program
-        .version(version)
+    let cliProgram: any = program.version(version);
+    cliProgram
         .arguments("[configurationfile]")
         .action(function (configurationfile) {
             Logger.info("Default config file overridden by : ");
@@ -66,7 +66,7 @@ function main(args: Array<string>) {
         }
     }
 
-    // Next check if we've finally found a file
+    // Next check if we've finally found a file (via cli or by default)
     if (!_.isNil(configFile)) {
         // Parse the config file
         let config: Configuration;
@@ -75,8 +75,8 @@ function main(args: Array<string>) {
         // Check if configuration is valid
         if (config.isValid()) {
             // Override the server port by the one given to the cl, if there's one
-            if (program.port) {
-                config.setPort(program.port);
+            if (cliProgram.port) {
+                config.setPort(cliProgram.port);
             }
 
             // Instanciate the express server

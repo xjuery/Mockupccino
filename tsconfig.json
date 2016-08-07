@@ -10,14 +10,14 @@
     "node_modules"
   ],
   "files": [
-    "typings/main.d.ts",
+    "typings/index.d.ts",
     "src/Configuration.ts",
     "src/ConfigurationStructure.ts",
     "src/Endpoint.ts",
     "src/GlobalConfiguration.ts",
     "src/Logger.ts",
-    "src/Main.ts",
-    "src/MockupccinoServer.ts",
+    "src/Mockupccino.ts",
+    "src/InternalServer.ts",
     "src/StaticContent.ts"
   ]
 }
