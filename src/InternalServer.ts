@@ -168,9 +168,14 @@ export class MockupccinoServer {
 
         this.expressServer.post("/populate", upload.any(),
             (req: any, res: any) => {
-                Logger.debug(req.body);
+                Logger.debug(JSON.stringify(req.body));
                 this.dataCache[req.body.url + "-" + req.body.method] = req.body.object;
-                console.dir(this.dataCache);
+                Logger.debug("Internal Datacache: ");
+
+                let strMap = new Map();
+                for (let k of Object.keys(this.dataCache)) {
+                    Logger.debug("{"+JSON.stringify(k)+": "+JSON.stringify(this.dataCache[k])+"}");
+                }
 
                 // Prepare response
                 res.statusCode = 200;

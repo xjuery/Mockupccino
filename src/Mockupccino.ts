@@ -4,7 +4,7 @@ import * as program from "commander";
 import * as chalk from "chalk";
 import {Logger} from "./Logger";
 import {Configuration} from "./Configuration";
-import {MockupccinoServer} from "./MockupccinoServer";
+import {InternalServer} from "./InternalServer";
 
 export var App = main(process.argv);
 
@@ -84,8 +84,8 @@ function main(args: Array<string>) {
 
             Logger.info("Found " + config.getEndpoints().length + " endpoints");
 
-            let mockupccinoServer = new MockupccinoServer(config, expressApp);
-            mockupccinoServer.launch();
+            let iServer = new InternalServer(config, expressApp);
+            iServer.launch();
 
             return expressApp;
         } else {
