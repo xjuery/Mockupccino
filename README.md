@@ -1,7 +1,8 @@
+
 Mockupccino - a REST/JSON server simulation tool
 ================================================
 
-[![NPM version](https://img.shields.io/badge/npm-v3.3.12-brightgreen.svg)](https://www.npmjs.com/package/mockupccino) [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://www.npmjs.com/package/mockupccino)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bc0a6c8a1b4548929388d903d068ff5d)](https://www.codacy.com/app/xjuery/Mockupccino?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=xjuery/Mockupccino&amp;utm_campaign=Badge_Grade) [![NPM version](https://img.shields.io/badge/npm-v3.3.12-brightgreen.svg)](https://www.npmjs.com/package/mockupccino) [![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://www.npmjs.com/package/mockupccino)
 
 
 License [LGPL v3](https://github.com/xjuery/Mockupccino/blob/master/LICENSE)
