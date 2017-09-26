@@ -174,7 +174,7 @@ export class InternalServer {
 
                 let strMap = new Map();
                 for (let k of Object.keys(this.dataCache)) {
-                    Logger.debug("{"+JSON.stringify(k)+": "+JSON.stringify(this.dataCache[k])+"}");
+                    Logger.debug("{" + JSON.stringify(k) + ": " + JSON.stringify(this.dataCache[k]) + "}");
                 }
 
                 // Prepare response
