@@ -7,7 +7,7 @@ Mockupccino - a REST/JSON server simulation tool
 
 License [LGPL v3](https://github.com/xjuery/Mockupccino/blob/master/LICENSE)
 
-##Overview
+## Overview
 Mockupccino is a REST/JSON server simulation tool which allow developers to test their REST clients.
 
 Mockupccino doesn't require any intrusive configuration into your projects, just run Mockupccino with its configuration file and that's all.
@@ -75,9 +75,11 @@ shell: {
 }
 ```
 
-##The configuration file
-The following example shows how the config file should look like:
+## The configuration file
+The following example shows how the config file should look like. Mockupccino uses the file extension to determine which format to use (i.e. `.yaml` for YAML format, `.json` for JSON format).
+
 ### JSON Format
+
 ```json
 {
     "global":{
@@ -118,34 +120,36 @@ The following example shows how the config file should look like:
     ]
 }
 ```
+
 ### YAML Format
+
 ```yaml
-  global:
-    port: 4000
-    staticContent:
-      - url: "/"
-        path: "/home/user/myProject/app"
+global:
+  port: 4000
+  staticContent:
+    - url: "/"
+      path: "/home/user/myProject/app"
 
-      - url: "/styles"
-        path: "/home/user/myProject/.tmp/styles"
+    - url: "/styles"
+      path: "/home/user/myProject/.tmp/styles"
 
-  endpoints:
-    - url: "/test1"
-      httpMethod: "GET"
-      loadSim: 5000
-      response:  {"msg":"Test1 OK", "ReturnCode":"200"}
+endpoints:
+  - url: "/test1"
+    httpMethod: "GET"
+    loadSim: 5000
+    response:  {"msg":"Test1 OK", "ReturnCode":"200"}
 
-    - url: "/test2"
-      httpMethod: "POST"
-      response: "Everything is OK"
+  - url: "/test2"
+    httpMethod: "POST"
+    response: "Everything is OK"
 
-    - url: "/test3"
-      httpMethod: "PUT"
-      response: {"msg":"Test 3 is ok also", "ReturnCode":"200"}
+  - url: "/test3"
+    httpMethod: "PUT"
+    response: {"msg":"Test 3 is ok also", "ReturnCode":"200"}
 
-    - url: "/test4"
-      httpMethod: "DELETE"
-      responseFile: "/home/user/myProject/app/test/myTestObject.json"
+  - url: "/test4"
+    httpMethod: "DELETE"
+    responseFile: "/home/user/myProject/app/test/myTestObject.json"
 ```
 In this file, you can find 2 main sections: the global section and the endpoints section.
 
@@ -202,7 +206,7 @@ I can then send a POST request to the /populate endpoint with the following body
 
 Now, each time we request the `/test2` endpoint with the `POST` HTTP Method, the answer will be `Overridden message`.
 
-##Future features
+## Future features
 1. Ability to configure the CORS Headers
 2. Ability to use a YAML/Swagger config file
 
