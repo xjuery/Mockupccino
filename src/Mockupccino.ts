@@ -1,13 +1,12 @@
 import * as express from "express";
 import * as _ from "lodash";
 import * as program from "commander";
-import * as chalk from "chalk";
+import chalk from "chalk"
 import {Logger} from "./Logger";
 import {Configuration} from "./Configuration";
 import {InternalServer} from "./InternalServer";
 
 export var App = main(process.argv);
-
 process.on("uncaughtException", (err: any) => {
         if (err.errno === "EADDRINUSE") {
             Logger.error("Port already used by an other application/service");

@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import * as yaml from "js-yaml";
+import {Logger} from "./Logger"
 import {ConfigurationStructure} from "./ConfigurationStructure";
-import {Logger} from "./Logger";
 import {Endpoint} from "./Endpoint";
 import {GlobalConfiguration} from "./GlobalConfiguration";
 
@@ -9,6 +9,7 @@ export class Configuration {
     configFile: string;
     // configuration: ConfigurationStructure;
     global: GlobalConfiguration;
+
     endpoints: Array<Endpoint>;
 
     constructor(cfgFile: string) {
@@ -42,8 +43,7 @@ export class Configuration {
     private parseJSONConfig(cFile: string): ConfigurationStructure {
         try {
             return JSON.parse(require("fs").readFileSync(cFile, "utf8"));
-        }
-        catch (err) {
+        } catch (err) {
             console.log("Unable to find or parse config file.");
             return;
         }
@@ -60,8 +60,7 @@ export class Configuration {
             } else {
                 return parsedConfig;
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.log("Unable to find or parse config file.");
             return null;
         }

@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "sourceMap": true,
+    "module": "CommonJS",
+    "target": "es5",
+    "sourceMap": false,
     "removeComments": true,
-    "outDir": "src/"
+    "rootDir": "src",
+    "outDir": "lib"
   },
   "exclude": [
     "node_modules"
   ],
   "files": [
-    "typings/index.d.ts",
-    "src/Configuration.ts",
-    "src/ConfigurationStructure.ts",
+    "src/Logger.ts",
+    "src/StaticContent.ts",
     "src/Endpoint.ts",
     "src/GlobalConfiguration.ts",
-    "src/Logger.ts",
-    "src/Mockupccino.ts",
+    "src/ConfigurationStructure.ts",
+    "src/Configuration.ts",
     "src/InternalServer.ts",
-    "src/StaticContent.ts"
+    "src/Mockupccino.ts"
   ]
 }

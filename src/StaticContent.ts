@@ -1,4 +1,5 @@
 export class StaticContent {
-    url: string;
-    path: string;
+  url: string;
+  path: string;
 }
+
